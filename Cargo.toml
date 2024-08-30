@@ -1,0 +1,8 @@
+[package]
+name = "rust-blockchain"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ink_lang = { version = "4.0", default-features = false }
+ink_storage = { version = "4.0", default-features = false }
