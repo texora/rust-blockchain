@@ -9,19 +9,19 @@ mod betting {
         traits::{PackedLayout, SpreadLayout},
     };
 
-    // #[derive(Debug, Clone, Copy, PartialEq, Eq, PackedLayout, SpreadLayout)]
-    // #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
-    // pub enum BetOption {
-    //     Option1,
-    //     Option2,
-    // }
-
-    #[derive(Debug, Default, Clone, PackedLayout, SpreadLayout)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, PackedLayout, SpreadLayout)]
     #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
-    pub struct Bet {
-        amount: Balance,
-        option: BetOption,
+    pub enum BetOption {
+        Option1,
+        Option2,
     }
+
+    // #[derive(Debug, Default, Clone, PackedLayout, SpreadLayout)]
+    // #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
+    // pub struct Bet {
+    //     amount: Balance,
+    //     option: BetOption,
+    // }
 
     #[ink(storage)]
     pub struct Betting {
