@@ -49,27 +49,27 @@ mod simple_dex {
 
         /// Removes liquidity from the pool and returns the amounts of tokens withdrawn
         #[ink(message)]
-        // pub fn remove_liquidity(&mut self, liquidity: Balance) -> (Balance, Balance) {
-        //     let caller = self.env().caller();
-        //     let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
-        //     assert!(user_liquidity >= liquidity, "Insufficient liquidity");
-        //     let amount_a = liquidity * self.token_a_balance / self.total_liquidity;
-        //     let amount_b = liquidity * self.token_b_balance / self.total_liquidity;
-        //     self.token_a_balance -= amount_a;
-        //     self.token_b_balance -= amount_b;
-        //     self.total_liquidity -= liquidity;
-        //     self.liquidity_providers.insert(&caller, &(user_liquidity - liquidity));
-        //     (amount_a, amount_b)
-        // }
+        pub fn remove_liquidity(&mut self, liquidity: Balance) -> (Balance, Balance) {
+            let caller = self.env().caller();
+            let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
+            assert!(user_liquidity >= liquidity, "Insufficient liquidity");
+            let amount_a = liquidity * self.token_a_balance / self.total_liquidity;
+            let amount_b = liquidity * self.token_b_balance / self.total_liquidity;
+            self.token_a_balance -= amount_a;
+            self.token_b_balance -= amount_b;
+            self.total_liquidity -= liquidity;
+            self.liquidity_providers.insert(&caller, &(user_liquidity - liquidity));
+            (amount_a, amount_b)
+        }
 
         /// Swaps `amount_a` of TokenA for TokenB
         #[ink(message)]
-        pub fn swap_a_for_b(&mut self, amount_a: Balance) -> Balance {
-            let amount_b = self.get_amount_out(amount_a, self.token_a_balance, self.token_b_balance);
-            self.token_a_balance += amount_a;
-            self.token_b_balance -= amount_b;
-            amount_b
-        }
+        // pub fn swap_a_for_b(&mut self, amount_a: Balance) -> Balance {
+        //     let amount_b = self.get_amount_out(amount_a, self.token_a_balance, self.token_b_balance);
+        //     self.token_a_balance += amount_a;
+        //     self.token_b_balance -= amount_b;
+        //     amount_b
+        // }
 
         /// Swaps `amount_b` of TokenB for TokenA
         #[ink(message)]
