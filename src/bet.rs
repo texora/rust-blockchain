@@ -68,19 +68,19 @@ mod betting {
         }
 
         #[ink(message)]
-        // pub fn close_betting(&mut self) {
-        //     assert_eq!(self.env().caller(), self.owner, "Only the owner can close betting");
-        //     self.betting_open = false;
-        // }
+        pub fn close_betting(&mut self) {
+            assert_eq!(self.env().caller(), self.owner, "Only the owner can close betting");
+            self.betting_open = false;
+        }
 
         #[ink(message)]
-        pub fn select_winner(&mut self, option: BetOption) {
-            assert_eq!(self.env().caller(), self.owner, "Only the owner can select the winner");
-            assert!(!self.betting_open, "Betting must be closed before selecting a winner");
+        // pub fn select_winner(&mut self, option: BetOption) {
+        //     assert_eq!(self.env().caller(), self.owner, "Only the owner can select the winner");
+        //     assert!(!self.betting_open, "Betting must be closed before selecting a winner");
 
-            self.winner = Some(option);
-            self.distribute_rewards();
-        }
+        //     self.winner = Some(option);
+        //     self.distribute_rewards();
+        // }
 
         #[ink(message)]
         pub fn withdraw(&mut self) {
