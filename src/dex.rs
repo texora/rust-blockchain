@@ -73,12 +73,12 @@ mod simple_dex {
 
         /// Swaps `amount_b` of TokenB for TokenA
         #[ink(message)]
-        // pub fn swap_b_for_a(&mut self, amount_b: Balance) -> Balance {
-        //     let amount_a = self.get_amount_out(amount_b, self.token_b_balance, self.token_a_balance);
-        //     self.token_b_balance += amount_b;
-        //     self.token_a_balance -= amount_a;
-        //     amount_a
-        // }
+        pub fn swap_b_for_a(&mut self, amount_b: Balance) -> Balance {
+            let amount_a = self.get_amount_out(amount_b, self.token_b_balance, self.token_a_balance);
+            self.token_b_balance += amount_b;
+            self.token_a_balance -= amount_a;
+            amount_a
+        }
 
         /// Helper function to calculate output amount based on input amount and reserves
         fn get_amount_out(&self, amount_in: Balance, reserve_in: Balance, reserve_out: Balance) -> Balance {
@@ -104,10 +104,10 @@ mod simple_dex {
             (self.token_a_balance, self.token_b_balance)
         }
 
-        #[ink(message)]
-        pub fn get_total_liquidity(&self) -> Balance {
-            self.total_liquidity
-        }
+        // #[ink(message)]
+        // pub fn get_total_liquidity(&self) -> Balance {
+        //     self.total_liquidity
+        // }
 
         #[ink(message)]
         pub fn get_user_liquidity(&self, user: AccountId) -> Balance {
