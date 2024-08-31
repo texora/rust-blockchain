@@ -16,23 +16,23 @@ mod betting {
         Option2,
     }
 
-    // #[derive(Debug, Default, Clone, PackedLayout, SpreadLayout)]
-    // #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
-    // pub struct Bet {
-    //     amount: Balance,
-    //     option: BetOption,
-    // }
-
-    #[ink(storage)]
-    pub struct Betting {
-        owner: AccountId,
-        bets: StorageHashMap<AccountId, Bet>,
-        total_amount: Balance,
-        option1_amount: Balance,
-        option2_amount: Balance,
-        betting_open: bool,
-        winner: Option<BetOption>,
+    #[derive(Debug, Default, Clone, PackedLayout, SpreadLayout)]
+    #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
+    pub struct Bet {
+        amount: Balance,
+        option: BetOption,
     }
+
+    // #[ink(storage)]
+    // pub struct Betting {
+    //     owner: AccountId,
+    //     bets: StorageHashMap<AccountId, Bet>,
+    //     total_amount: Balance,
+    //     option1_amount: Balance,
+    //     option2_amount: Balance,
+    //     betting_open: bool,
+    //     winner: Option<BetOption>,
+    // }
 
     impl Betting {
         #[ink(constructor)]
