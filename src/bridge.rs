@@ -44,23 +44,23 @@ mod bridge {
         }
 
         #[ink(message)]
-        pub fn lock(&mut self, target_chain: u32, target_address: [u8; 32], amount: Balance) -> Result<(), &'static str> {
-            let caller = self.env().caller();
+        // pub fn lock(&mut self, target_chain: u32, target_address: [u8; 32], amount: Balance) -> Result<(), &'static str> {
+        //     let caller = self.env().caller();
 
-            self.transfer_from(caller, self.env().account_id(), amount)?;
+        //     self.transfer_from(caller, self.env().account_id(), amount)?;
 
-            let current_locked = self.locked_tokens.get(&caller).unwrap_or(0);
-            self.locked_tokens.insert(&caller, &(current_locked + amount));
+        //     let current_locked = self.locked_tokens.get(&caller).unwrap_or(0);
+        //     self.locked_tokens.insert(&caller, &(current_locked + amount));
 
-            self.env().emit_event(Locked {
-                from: caller,
-                amount,
-                target_chain,
-                target_address,
-            });
+        //     self.env().emit_event(Locked {
+        //         from: caller,
+        //         amount,
+        //         target_chain,
+        //         target_address,
+        //     });
 
-            Ok(())
-        }
+        //     Ok(())
+        // }
 
         #[ink(message)]
         pub fn unlock(&mut self, to: AccountId, amount: Balance) -> Result<(), &'static str> {
