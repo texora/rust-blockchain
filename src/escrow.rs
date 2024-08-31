@@ -8,22 +8,22 @@ mod escrow {
     use super::*;
 
     #[ink(storage)]
-    // pub struct Escrow {
-    //     pub buyer: AccountId,
-    //     pub seller: AccountId,
-    //     pub arbiter: AccountId,
-    //     pub amount: Balance,
-    //     pub is_funded: bool,
-    //     pub is_released: bool,
-    // }
+    pub struct Escrow {
+        pub buyer: AccountId,
+        pub seller: AccountId,
+        pub arbiter: AccountId,
+        pub amount: Balance,
+        pub is_funded: bool,
+        pub is_released: bool,
+    }
 
     #[ink(event)]
-    pub struct Funded {
-        #[ink(topic)]
-        buyer: AccountId,
-        #[ink(topic)]
-        amount: Balance,
-    }
+    // pub struct Funded {
+    //     #[ink(topic)]
+    //     buyer: AccountId,
+    //     #[ink(topic)]
+    //     amount: Balance,
+    // }
 
     #[ink(event)]
     pub struct Released {
