@@ -36,31 +36,31 @@ mod simple_dex {
 
         /// Adds liquidity to the pool and returns the amount of liquidity tokens minted
         #[ink(message)]
-        // pub fn add_liquidity(&mut self, amount_a: Balance, amount_b: Balance) -> Balance {
-        //     let caller = self.env().caller();
-        //     let liquidity_minted = Self::calculate_liquidity(amount_a, amount_b);
-        //     self.token_a_balance += amount_a;
-        //     self.token_b_balance += amount_b;
-        //     self.total_liquidity += liquidity_minted;
-        //     let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
-        //     self.liquidity_providers.insert(&caller, &(user_liquidity + liquidity_minted));
-        //     liquidity_minted
-        // }
+        pub fn add_liquidity(&mut self, amount_a: Balance, amount_b: Balance) -> Balance {
+            let caller = self.env().caller();
+            let liquidity_minted = Self::calculate_liquidity(amount_a, amount_b);
+            self.token_a_balance += amount_a;
+            self.token_b_balance += amount_b;
+            self.total_liquidity += liquidity_minted;
+            let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
+            self.liquidity_providers.insert(&caller, &(user_liquidity + liquidity_minted));
+            liquidity_minted
+        }
 
         /// Removes liquidity from the pool and returns the amounts of tokens withdrawn
         #[ink(message)]
-        pub fn remove_liquidity(&mut self, liquidity: Balance) -> (Balance, Balance) {
-            let caller = self.env().caller();
-            let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
-            assert!(user_liquidity >= liquidity, "Insufficient liquidity");
-            let amount_a = liquidity * self.token_a_balance / self.total_liquidity;
-            let amount_b = liquidity * self.token_b_balance / self.total_liquidity;
-            self.token_a_balance -= amount_a;
-            self.token_b_balance -= amount_b;
-            self.total_liquidity -= liquidity;
-            self.liquidity_providers.insert(&caller, &(user_liquidity - liquidity));
-            (amount_a, amount_b)
-        }
+        // pub fn remove_liquidity(&mut self, liquidity: Balance) -> (Balance, Balance) {
+        //     let caller = self.env().caller();
+        //     let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
+        //     assert!(user_liquidity >= liquidity, "Insufficient liquidity");
+        //     let amount_a = liquidity * self.token_a_balance / self.total_liquidity;
+        //     let amount_b = liquidity * self.token_b_balance / self.total_liquidity;
+        //     self.token_a_balance -= amount_a;
+        //     self.token_b_balance -= amount_b;
+        //     self.total_liquidity -= liquidity;
+        //     self.liquidity_providers.insert(&caller, &(user_liquidity - liquidity));
+        //     (amount_a, amount_b)
+        // }
 
         /// Swaps `amount_a` of TokenA for TokenB
         #[ink(message)]
