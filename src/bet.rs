@@ -36,36 +36,36 @@ mod betting {
 
     impl Betting {
         #[ink(constructor)]
-        // pub fn new() -> Self {
-        //     Self {
-        //         owner: Self::env().caller(),
-        //         bets: StorageHashMap::new(),
-        //         total_amount: 0,
-        //         option1_amount: 0,
-        //         option2_amount: 0,
-        //         betting_open: true,
-        //         winner: None,
-        //     }
-        // }
+        pub fn new() -> Self {
+            Self {
+                owner: Self::env().caller(),
+                bets: StorageHashMap::new(),
+                total_amount: 0,
+                option1_amount: 0,
+                option2_amount: 0,
+                betting_open: true,
+                winner: None,
+            }
+        }
 
         #[ink(message)]
-        pub fn place_bet(&mut self, option: BetOption) {
-            let caller = self.env().caller();
-            let value = self.env().transferred_balance();
+        // pub fn place_bet(&mut self, option: BetOption) {
+        //     let caller = self.env().caller();
+        //     let value = self.env().transferred_balance();
 
-            assert!(self.betting_open, "Betting is closed");
-            assert!(value > 0, "Bet amount must be greater than zero");
+        //     assert!(self.betting_open, "Betting is closed");
+        //     assert!(value > 0, "Bet amount must be greater than zero");
 
-            let bet = Bet { amount: value, option };
+        //     let bet = Bet { amount: value, option };
 
-            self.total_amount += value;
-            match option {
-                BetOption::Option1 => self.option1_amount += value,
-                BetOption::Option2 => self.option2_amount += value,
-            }
+        //     self.total_amount += value;
+        //     match option {
+        //         BetOption::Option1 => self.option1_amount += value,
+        //         BetOption::Option2 => self.option2_amount += value,
+        //     }
 
-            self.bets.insert(caller, bet);
-        }
+        //     self.bets.insert(caller, bet);
+        // }
 
         #[ink(message)]
         pub fn close_betting(&mut self) {
