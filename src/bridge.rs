@@ -44,39 +44,39 @@ mod bridge {
         }
 
         #[ink(message)]
-        // pub fn lock(&mut self, target_chain: u32, target_address: [u8; 32], amount: Balance) -> Result<(), &'static str> {
-        //     let caller = self.env().caller();
-
-        //     self.transfer_from(caller, self.env().account_id(), amount)?;
-
-        //     let current_locked = self.locked_tokens.get(&caller).unwrap_or(0);
-        //     self.locked_tokens.insert(&caller, &(current_locked + amount));
-
-        //     self.env().emit_event(Locked {
-        //         from: caller,
-        //         amount,
-        //         target_chain,
-        //         target_address,
-        //     });
-
-        //     Ok(())
-        // }
-
-        #[ink(message)]
-        pub fn unlock(&mut self, to: AccountId, amount: Balance) -> Result<(), &'static str> {
+        pub fn lock(&mut self, target_chain: u32, target_address: [u8; 32], amount: Balance) -> Result<(), &'static str> {
             let caller = self.env().caller();
-            let is_admin = self.admins.get(&caller).unwrap_or(false);
 
-            if !is_admin {
-                return Err("Only admin can unlock tokens");
-            }
+            self.transfer_from(caller, self.env().account_id(), amount)?;
 
-            self.transfer_from(self.env().account_id(), to, amount)?;
+            let current_locked = self.locked_tokens.get(&caller).unwrap_or(0);
+            self.locked_tokens.insert(&caller, &(current_locked + amount));
 
-            self.env().emit_event(Unlocked { to, amount });
+            self.env().emit_event(Locked {
+                from: caller,
+                amount,
+                target_chain,
+                target_address,
+            });
 
             Ok(())
         }
+
+        #[ink(message)]
+        // pub fn unlock(&mut self, to: AccountId, amount: Balance) -> Result<(), &'static str> {
+        //     let caller = self.env().caller();
+        //     let is_admin = self.admins.get(&caller).unwrap_or(false);
+
+        //     if !is_admin {
+        //         return Err("Only admin can unlock tokens");
+        //     }
+
+        //     self.transfer_from(self.env().account_id(), to, amount)?;
+
+        //     self.env().emit_event(Unlocked { to, amount });
+
+        //     Ok(())
+        // }
 
         fn transfer_from(&self, from: AccountId, to: AccountId, amount: Balance) -> Result<(), &'static str> {
             Ok(())
