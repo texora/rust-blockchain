@@ -9,15 +9,15 @@ mod simple_dex {
     use super::*;
 
     #[ink(storage)]
-    pub struct SimpleDex {
-        // Simulated token balances within the DEX
-        token_a_balance: Balance,
-        token_b_balance: Balance,
-        // Total liquidity provided
-        total_liquidity: Balance,
-        // Mapping of user address to their liquidity shares
-        liquidity_providers: Mapping<AccountId, Balance>,
-    }
+    // pub struct SimpleDex {
+    //     // Simulated token balances within the DEX
+    //     token_a_balance: Balance,
+    //     token_b_balance: Balance,
+    //     // Total liquidity provided
+    //     total_liquidity: Balance,
+    //     // Mapping of user address to their liquidity shares
+    //     liquidity_providers: Mapping<AccountId, Balance>,
+    // }
 
     impl SimpleDex {
         #[ink(constructor)]
