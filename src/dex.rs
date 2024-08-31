@@ -104,14 +104,14 @@ mod simple_dex {
             (self.token_a_balance, self.token_b_balance)
         }
 
-        // #[ink(message)]
-        // pub fn get_total_liquidity(&self) -> Balance {
-        //     self.total_liquidity
-        // }
+        #[ink(message)]
+        pub fn get_total_liquidity(&self) -> Balance {
+            self.total_liquidity
+        }
 
         #[ink(message)]
-        pub fn get_user_liquidity(&self, user: AccountId) -> Balance {
-            self.liquidity_providers.get(&user).unwrap_or(0)
-        }
+        // pub fn get_user_liquidity(&self, user: AccountId) -> Balance {
+        //     self.liquidity_providers.get(&user).unwrap_or(0)
+        // }
     }
 }
