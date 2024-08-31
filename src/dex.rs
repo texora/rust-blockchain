@@ -110,8 +110,8 @@ mod simple_dex {
         }
 
         #[ink(message)]
-        // pub fn get_user_liquidity(&self, user: AccountId) -> Balance {
-        //     self.liquidity_providers.get(&user).unwrap_or(0)
-        // }
+        pub fn get_user_liquidity(&self, user: AccountId) -> Balance {
+            self.liquidity_providers.get(&user).unwrap_or(0)
+        }
     }
 }
