@@ -64,21 +64,21 @@ mod simple_dex {
 
         /// Swaps `amount_a` of TokenA for TokenB
         #[ink(message)]
-        // pub fn swap_a_for_b(&mut self, amount_a: Balance) -> Balance {
-        //     let amount_b = self.get_amount_out(amount_a, self.token_a_balance, self.token_b_balance);
-        //     self.token_a_balance += amount_a;
-        //     self.token_b_balance -= amount_b;
-        //     amount_b
-        // }
+        pub fn swap_a_for_b(&mut self, amount_a: Balance) -> Balance {
+            let amount_b = self.get_amount_out(amount_a, self.token_a_balance, self.token_b_balance);
+            self.token_a_balance += amount_a;
+            self.token_b_balance -= amount_b;
+            amount_b
+        }
 
         /// Swaps `amount_b` of TokenB for TokenA
         #[ink(message)]
-        pub fn swap_b_for_a(&mut self, amount_b: Balance) -> Balance {
-            let amount_a = self.get_amount_out(amount_b, self.token_b_balance, self.token_a_balance);
-            self.token_b_balance += amount_b;
-            self.token_a_balance -= amount_a;
-            amount_a
-        }
+        // pub fn swap_b_for_a(&mut self, amount_b: Balance) -> Balance {
+        //     let amount_a = self.get_amount_out(amount_b, self.token_b_balance, self.token_a_balance);
+        //     self.token_b_balance += amount_b;
+        //     self.token_a_balance -= amount_a;
+        //     amount_a
+        // }
 
         /// Helper function to calculate output amount based on input amount and reserves
         fn get_amount_out(&self, amount_in: Balance, reserve_in: Balance, reserve_out: Balance) -> Balance {
