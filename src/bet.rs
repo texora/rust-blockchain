@@ -23,30 +23,30 @@ mod betting {
         option: BetOption,
     }
 
-    // #[ink(storage)]
-    // pub struct Betting {
-    //     owner: AccountId,
-    //     bets: StorageHashMap<AccountId, Bet>,
-    //     total_amount: Balance,
-    //     option1_amount: Balance,
-    //     option2_amount: Balance,
-    //     betting_open: bool,
-    //     winner: Option<BetOption>,
-    // }
+    #[ink(storage)]
+    pub struct Betting {
+        owner: AccountId,
+        bets: StorageHashMap<AccountId, Bet>,
+        total_amount: Balance,
+        option1_amount: Balance,
+        option2_amount: Balance,
+        betting_open: bool,
+        winner: Option<BetOption>,
+    }
 
     impl Betting {
         #[ink(constructor)]
-        pub fn new() -> Self {
-            Self {
-                owner: Self::env().caller(),
-                bets: StorageHashMap::new(),
-                total_amount: 0,
-                option1_amount: 0,
-                option2_amount: 0,
-                betting_open: true,
-                winner: None,
-            }
-        }
+        // pub fn new() -> Self {
+        //     Self {
+        //         owner: Self::env().caller(),
+        //         bets: StorageHashMap::new(),
+        //         total_amount: 0,
+        //         option1_amount: 0,
+        //         option2_amount: 0,
+        //         betting_open: true,
+        //         winner: None,
+        //     }
+        // }
 
         #[ink(message)]
         pub fn place_bet(&mut self, option: BetOption) {
