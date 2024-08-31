@@ -74,32 +74,32 @@ mod betting {
         }
 
         #[ink(message)]
-        // pub fn select_winner(&mut self, option: BetOption) {
-        //     assert_eq!(self.env().caller(), self.owner, "Only the owner can select the winner");
-        //     assert!(!self.betting_open, "Betting must be closed before selecting a winner");
+        pub fn select_winner(&mut self, option: BetOption) {
+            assert_eq!(self.env().caller(), self.owner, "Only the owner can select the winner");
+            assert!(!self.betting_open, "Betting must be closed before selecting a winner");
 
-        //     self.winner = Some(option);
-        //     self.distribute_rewards();
-        // }
+            self.winner = Some(option);
+            self.distribute_rewards();
+        }
 
         #[ink(message)]
-        pub fn withdraw(&mut self) {
-            let caller = self.env().caller();
-            assert!(self.winner.is_some(), "Winner not selected yet");
+        // pub fn withdraw(&mut self) {
+        //     let caller = self.env().caller();
+        //     assert!(self.winner.is_some(), "Winner not selected yet");
 
-            if let Some(bet) = self.bets.get(&caller) {
-                if bet.option == self.winner.unwrap() {
-                    let payout_ratio = self.total_amount / match self.winner.unwrap() {
-                        BetOption::Option1 => self.option1_amount,
-                        BetOption::Option2 => self.option2_amount,
-                    };
+        //     if let Some(bet) = self.bets.get(&caller) {
+        //         if bet.option == self.winner.unwrap() {
+        //             let payout_ratio = self.total_amount / match self.winner.unwrap() {
+        //                 BetOption::Option1 => self.option1_amount,
+        //                 BetOption::Option2 => self.option2_amount,
+        //             };
 
-                    let payout = bet.amount * payout_ratio;
-                    self.env().transfer(caller, payout).expect("Transfer failed");
-                    self.bets.take(&caller); // Remove the bet after payout
-                }
-            }
-        }
+        //             let payout = bet.amount * payout_ratio;
+        //             self.env().transfer(caller, payout).expect("Transfer failed");
+        //             self.bets.take(&caller); // Remove the bet after payout
+        //         }
+        //     }
+        // }
 
         fn distribute_rewards(&mut self) {
             if let Some(winning_option) = self.winner {
