@@ -63,24 +63,24 @@ mod bridge {
         }
 
         #[ink(message)]
-        // pub fn unlock(&mut self, to: AccountId, amount: Balance) -> Result<(), &'static str> {
-        //     let caller = self.env().caller();
-        //     let is_admin = self.admins.get(&caller).unwrap_or(false);
+        pub fn unlock(&mut self, to: AccountId, amount: Balance) -> Result<(), &'static str> {
+            let caller = self.env().caller();
+            let is_admin = self.admins.get(&caller).unwrap_or(false);
 
-        //     if !is_admin {
-        //         return Err("Only admin can unlock tokens");
-        //     }
+            if !is_admin {
+                return Err("Only admin can unlock tokens");
+            }
 
-        //     self.transfer_from(self.env().account_id(), to, amount)?;
+            self.transfer_from(self.env().account_id(), to, amount)?;
 
-        //     self.env().emit_event(Unlocked { to, amount });
+            self.env().emit_event(Unlocked { to, amount });
 
-        //     Ok(())
-        // }
-
-        fn transfer_from(&self, from: AccountId, to: AccountId, amount: Balance) -> Result<(), &'static str> {
             Ok(())
         }
+
+        // fn transfer_from(&self, from: AccountId, to: AccountId, amount: Balance) -> Result<(), &'static str> {
+        //     Ok(())
+        // }
 
         #[ink(message)]
         pub fn add_admin(&mut self, new_admin: AccountId) -> Result<(), &'static str> {
