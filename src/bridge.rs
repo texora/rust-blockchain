@@ -83,29 +83,29 @@ mod bridge {
         }
 
         #[ink(message)]
-        // pub fn add_admin(&mut self, new_admin: AccountId) -> Result<(), &'static str> {
-        //     let caller = self.env().caller();
-        //     let is_admin = self.admins.get(&caller).unwrap_or(false);
-
-        //     if !is_admin {
-        //         return Err("Only an existing admin can add a new admin");
-        //     }
-
-        //     self.admins.insert(&new_admin, &true);
-        //     Ok(())
-        // }
-
-        #[ink(message)]
-        pub fn remove_admin(&mut self, admin: AccountId) -> Result<(), &'static str> {
+        pub fn add_admin(&mut self, new_admin: AccountId) -> Result<(), &'static str> {
             let caller = self.env().caller();
             let is_admin = self.admins.get(&caller).unwrap_or(false);
 
             if !is_admin {
-                return Err("Only an existing admin can remove an admin");
+                return Err("Only an existing admin can add a new admin");
             }
 
-            self.admins.insert(&admin, &false);
+            self.admins.insert(&new_admin, &true);
             Ok(())
         }
+
+        #[ink(message)]
+        // pub fn remove_admin(&mut self, admin: AccountId) -> Result<(), &'static str> {
+        //     let caller = self.env().caller();
+        //     let is_admin = self.admins.get(&caller).unwrap_or(false);
+
+        //     if !is_admin {
+        //         return Err("Only an existing admin can remove an admin");
+        //     }
+
+        //     self.admins.insert(&admin, &false);
+        //     Ok(())
+        // }
     }
 }
