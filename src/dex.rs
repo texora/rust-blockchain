@@ -9,15 +9,15 @@ mod simple_dex {
     use super::*;
 
     #[ink(storage)]
-    // pub struct SimpleDex {
-    //     // Simulated token balances within the DEX
-    //     token_a_balance: Balance,
-    //     token_b_balance: Balance,
-    //     // Total liquidity provided
-    //     total_liquidity: Balance,
-    //     // Mapping of user address to their liquidity shares
-    //     liquidity_providers: Mapping<AccountId, Balance>,
-    // }
+    pub struct SimpleDex {
+        // Simulated token balances within the DEX
+        token_a_balance: Balance,
+        token_b_balance: Balance,
+        // Total liquidity provided
+        total_liquidity: Balance,
+        // Mapping of user address to their liquidity shares
+        liquidity_providers: Mapping<AccountId, Balance>,
+    }
 
     impl SimpleDex {
         #[ink(constructor)]
@@ -36,16 +36,16 @@ mod simple_dex {
 
         /// Adds liquidity to the pool and returns the amount of liquidity tokens minted
         #[ink(message)]
-        pub fn add_liquidity(&mut self, amount_a: Balance, amount_b: Balance) -> Balance {
-            let caller = self.env().caller();
-            let liquidity_minted = Self::calculate_liquidity(amount_a, amount_b);
-            self.token_a_balance += amount_a;
-            self.token_b_balance += amount_b;
-            self.total_liquidity += liquidity_minted;
-            let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
-            self.liquidity_providers.insert(&caller, &(user_liquidity + liquidity_minted));
-            liquidity_minted
-        }
+        // pub fn add_liquidity(&mut self, amount_a: Balance, amount_b: Balance) -> Balance {
+        //     let caller = self.env().caller();
+        //     let liquidity_minted = Self::calculate_liquidity(amount_a, amount_b);
+        //     self.token_a_balance += amount_a;
+        //     self.token_b_balance += amount_b;
+        //     self.total_liquidity += liquidity_minted;
+        //     let user_liquidity = self.liquidity_providers.get(&caller).unwrap_or(0);
+        //     self.liquidity_providers.insert(&caller, &(user_liquidity + liquidity_minted));
+        //     liquidity_minted
+        // }
 
         /// Removes liquidity from the pool and returns the amounts of tokens withdrawn
         #[ink(message)]
