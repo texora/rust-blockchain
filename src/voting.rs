@@ -12,33 +12,33 @@ mod voting {
 
     impl Voting {
         #[ink(constructor)]
-        // pub fn new(candidates: Vec<String>) -> Self {
-        //     let votes = Mapping::new();
-        //     let has_voted = Mapping::new();
-        //     Self {
-        //         candidates,
-        //         votes,
-        //         has_voted,
-        //     }
-        // }
+        pub fn new(candidates: Vec<String>) -> Self {
+            let votes = Mapping::new();
+            let has_voted = Mapping::new();
+            Self {
+                candidates,
+                votes,
+                has_voted,
+            }
+        }
 
         #[ink(message)]
-        pub fn vote(&mut self, candidate: String) -> Result<(), String> {
-            let caller = self.env().caller();
-            if self.has_voted.get(&caller).unwrap_or(false) {
-                return Err("You have already voted.".into());
-            }
+        // pub fn vote(&mut self, candidate: String) -> Result<(), String> {
+        //     let caller = self.env().caller();
+        //     if self.has_voted.get(&caller).unwrap_or(false) {
+        //         return Err("You have already voted.".into());
+        //     }
 
-            if !self.candidates.contains(&candidate) {
-                return Err("Candidate not found.".into());
-            }
+        //     if !self.candidates.contains(&candidate) {
+        //         return Err("Candidate not found.".into());
+        //     }
 
-            let current_votes = self.votes.get(&candidate).unwrap_or(0);
-            self.votes.insert(&candidate, &(current_votes + 1));
-            self.has_voted.insert(&caller, &true);
+        //     let current_votes = self.votes.get(&candidate).unwrap_or(0);
+        //     self.votes.insert(&candidate, &(current_votes + 1));
+        //     self.has_voted.insert(&caller, &true);
 
-            Ok(())
-        }
+        //     Ok(())
+        // }
 
         #[ink(message)]
         pub fn get_votes(&self, candidate: String) -> u32 {
