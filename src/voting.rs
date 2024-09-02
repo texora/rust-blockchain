@@ -46,8 +46,8 @@ mod voting {
         }
 
         #[ink(message)]
-        // pub fn get_candidates(&self) -> Vec<String> {
-        //     self.candidates.clone()
-        // }
+        pub fn get_candidates(&self) -> Vec<String> {
+            self.candidates.clone()
+        }
     }
 }
