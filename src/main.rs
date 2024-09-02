@@ -131,11 +131,11 @@ impl TokenContract {
         }
     }
 
-    // fn update_balances(&mut self, from: &str, to: &str, amount: u64) -> Result<(), String> {
-    //     *self.balances.entry(from.to_string()).or_insert(0) -= amount;
-    //     *self.balances.entry(to.to_string()).or_insert(0) += amount;
-    //     Ok(())
-    // }
+    fn update_balances(&mut self, from: &str, to: &str, amount: u64) -> Result<(), String> {
+        *self.balances.entry(from.to_string()).or_insert(0) -= amount;
+        *self.balances.entry(to.to_string()).or_insert(0) += amount;
+        Ok(())
+    }
 
     fn update_allowance(&mut self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
         let allowance = self
@@ -147,14 +147,14 @@ impl TokenContract {
         Ok(())
     }
 
-    fn emit_event(&mut self, event_type: &str, from: &str, to: &str, amount: u64) {
-        self.events.push(Event {
-            event_type: event_type.to_string(),
-            from: from.to_string(),
-            to: to.to_string(),
-            amount,
-        });
-    }
+    // fn emit_event(&mut self, event_type: &str, from: &str, to: &str, amount: u64) {
+    //     self.events.push(Event {
+    //         event_type: event_type.to_string(),
+    //         from: from.to_string(),
+    //         to: to.to_string(),
+    //         amount,
+    //     });
+    // }
 
     fn get_events(&self) -> &[Event] {
         &self.events
