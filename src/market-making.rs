@@ -23,20 +23,20 @@ mod market_maker {
     }
 
     #[ink(event)]
-    // pub struct TokensSwapped {
-    //     #[ink(topic)]
-    //     swapper: AccountId,
-    //     eth_in: Balance,
-    //     token_out: Balance,
-    // }
-
-    #[ink(event)]
-    pub struct ETHSwapped {
+    pub struct TokensSwapped {
         #[ink(topic)]
         swapper: AccountId,
-        token_in: Balance,
-        eth_out: Balance,
+        eth_in: Balance,
+        token_out: Balance,
     }
+
+    #[ink(event)]
+    // pub struct ETHSwapped {
+    //     #[ink(topic)]
+    //     swapper: AccountId,
+    //     token_in: Balance,
+    //     eth_out: Balance,
+    // }
 
     impl MarketMaker {
         #[ink(constructor)]
