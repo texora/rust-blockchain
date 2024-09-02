@@ -34,25 +34,25 @@ mod escrow {
     }
 
     #[ink(event)]
-    // pub struct Refunded {
-    //     #[ink(topic)]
-    //     to: AccountId,
-    //     #[ink(topic)]
-    //     amount: Balance,
-    // }
+    pub struct Refunded {
+        #[ink(topic)]
+        to: AccountId,
+        #[ink(topic)]
+        amount: Balance,
+    }
 
     impl Escrow {
         #[ink(constructor)]
-        pub fn new(seller: AccountId, arbiter: AccountId) -> Self {
-            Self {
-                buyer: Default::default(),
-                seller,
-                arbiter,
-                amount: 0,
-                is_funded: false,
-                is_released: false,
-            }
-        }
+        // pub fn new(seller: AccountId, arbiter: AccountId) -> Self {
+        //     Self {
+        //         buyer: Default::default(),
+        //         seller,
+        //         arbiter,
+        //         amount: 0,
+        //         is_funded: false,
+        //         is_released: false,
+        //     }
+        // }
 
         #[ink(message, payable)]
         pub fn fund(&mut self) -> Result<(), &'static str> {
