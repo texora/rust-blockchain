@@ -18,21 +18,21 @@ mod farming {
     }
 
     #[ink(storage)]
-    // pub struct Farming {
-    //     total_staked: Balance,
-    //     reward_rate: Balance,
-    //     stakers: StorageHashMap<AccountId, StakeInfo>,
-    // }
+    pub struct Farming {
+        total_staked: Balance,
+        reward_rate: Balance,
+        stakers: StorageHashMap<AccountId, StakeInfo>,
+    }
 
     impl Farming {
         #[ink(constructor)]
-        pub fn new(reward_rate: Balance) -> Self {
-            Self {
-                total_staked: 0,
-                reward_rate,
-                stakers: StorageHashMap::new(),
-            }
-        }
+        // pub fn new(reward_rate: Balance) -> Self {
+        //     Self {
+        //         total_staked: 0,
+        //         reward_rate,
+        //         stakers: StorageHashMap::new(),
+        //     }
+        // }
 
         #[ink(message)]
         pub fn stake(&mut self, amount: Balance) {
