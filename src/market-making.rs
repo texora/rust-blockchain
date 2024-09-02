@@ -7,12 +7,12 @@ mod market_maker {
     use ink_storage::collections::HashMap;
 
     #[ink(storage)]
-    pub struct MarketMaker {
-        owner: AccountId,
-        eth_reserve: Balance,
-        token_reserve: Balance,
-        token_balances: HashMap<AccountId, Balance>,
-    }
+    // pub struct MarketMaker {
+    //     owner: AccountId,
+    //     eth_reserve: Balance,
+    //     token_reserve: Balance,
+    //     token_balances: HashMap<AccountId, Balance>,
+    // }
 
     #[ink(event)]
     pub struct LiquidityAdded {
