@@ -181,17 +181,17 @@ impl TokenContract {
     }
 }
 
-// impl fmt::Debug for TokenContract {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         f.debug_struct("TokenContract")
-//             .field("name", &self.name)
-//             .field("symbol", &self.symbol)
-//             .field("total_supply", &self.total_supply)
-//             .field("balances", &self.balances)
-//             .field("allowances", &self.allowances)
-//             .finish()
-//     }
-// }
+impl fmt::Debug for TokenContract {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("TokenContract")
+            .field("name", &self.name)
+            .field("symbol", &self.symbol)
+            .field("total_supply", &self.total_supply)
+            .field("balances", &self.balances)
+            .field("allowances", &self.allowances)
+            .finish()
+    }
+}
 
 fn main() {
     let mut token = TokenContract::new("Yato".to_string(), "YTO".to_string(), 1_000_000);
