@@ -147,14 +147,14 @@ impl TokenContract {
         Ok(())
     }
 
-    // fn emit_event(&mut self, event_type: &str, from: &str, to: &str, amount: u64) {
-    //     self.events.push(Event {
-    //         event_type: event_type.to_string(),
-    //         from: from.to_string(),
-    //         to: to.to_string(),
-    //         amount,
-    //     });
-    // }
+    fn emit_event(&mut self, event_type: &str, from: &str, to: &str, amount: u64) {
+        self.events.push(Event {
+            event_type: event_type.to_string(),
+            from: from.to_string(),
+            to: to.to_string(),
+            amount,
+        });
+    }
 
     fn get_events(&self) -> &[Event] {
         &self.events
@@ -181,17 +181,17 @@ impl TokenContract {
     }
 }
 
-impl fmt::Debug for TokenContract {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("TokenContract")
-            .field("name", &self.name)
-            .field("symbol", &self.symbol)
-            .field("total_supply", &self.total_supply)
-            .field("balances", &self.balances)
-            .field("allowances", &self.allowances)
-            .finish()
-    }
-}
+// impl fmt::Debug for TokenContract {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         f.debug_struct("TokenContract")
+//             .field("name", &self.name)
+//             .field("symbol", &self.symbol)
+//             .field("total_supply", &self.total_supply)
+//             .field("balances", &self.balances)
+//             .field("allowances", &self.allowances)
+//             .finish()
+//     }
+// }
 
 fn main() {
     let mut token = TokenContract::new("Yato".to_string(), "YTO".to_string(), 1_000_000);
