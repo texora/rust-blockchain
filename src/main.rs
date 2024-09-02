@@ -94,17 +94,17 @@ impl TokenContract {
         Ok(())
     }
 
-    // fn balance_of(&self, account: &str) -> u64 {
-    //     *self.balances.get(account).unwrap_or(&0)
-    // }
-
-    fn allowance(&self, owner: &str, spender: &str) -> u64 {
-        self.allowances
-            .get(owner)
-            .and_then(|spenders| spenders.get(spender))
-            .cloned()
-            .unwrap_or(0)
+    fn balance_of(&self, account: &str) -> u64 {
+        *self.balances.get(account).unwrap_or(&0)
     }
+
+    // fn allowance(&self, owner: &str, spender: &str) -> u64 {
+    //     self.allowances
+    //         .get(owner)
+    //         .and_then(|spenders| spenders.get(spender))
+    //         .cloned()
+    //         .unwrap_or(0)
+    // }
 
     fn get_token_info(&self) -> (String, String, u64) {
         (self.name.clone(), self.symbol.clone(), self.total_supply)
