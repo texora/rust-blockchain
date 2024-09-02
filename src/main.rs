@@ -67,24 +67,24 @@ impl TokenContract {
         Ok(())
     }
 
-    // fn approve(&mut self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
-    //     self.allowances
-    //         .entry(owner.to_string())
-    //         .or_insert_with(HashMap::new)
-    //         .insert(spender.to_string(), amount);
-    //     self.emit_event("Approval", owner, spender, amount);
-    //     Ok(())
-    // }
-
-    fn mint(&mut self, to: &str, amount: u64) -> Result<(), String> {
-        if to != self.owner {
-            return Err("Only owner can mint tokens".to_string());
-        }
-        *self.balances.entry(to.to_string()).or_insert(0) += amount;
-        self.total_supply += amount;
-        self.emit_event("Mint", "0x0", to, amount);
+    fn approve(&mut self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
+        self.allowances
+            .entry(owner.to_string())
+            .or_insert_with(HashMap::new)
+            .insert(spender.to_string(), amount);
+        self.emit_event("Approval", owner, spender, amount);
         Ok(())
     }
+
+    // fn mint(&mut self, to: &str, amount: u64) -> Result<(), String> {
+    //     if to != self.owner {
+    //         return Err("Only owner can mint tokens".to_string());
+    //     }
+    //     *self.balances.entry(to.to_string()).or_insert(0) += amount;
+    //     self.total_supply += amount;
+    //     self.emit_event("Mint", "0x0", to, amount);
+    //     Ok(())
+    // }
 
     fn burn(&mut self, from: &str, amount: u64) -> Result<(), String> {
         self.check_balance(from, amount)?;
