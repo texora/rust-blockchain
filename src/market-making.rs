@@ -23,12 +23,12 @@ mod market_maker {
     }
 
     #[ink(event)]
-    // pub struct TokensSwapped {
-    //     #[ink(topic)]
-    //     swapper: AccountId,
-    //     eth_in: Balance,
-    //     token_out: Balance,
-    // }
+    pub struct TokensSwapped {
+        #[ink(topic)]
+        swapper: AccountId,
+        eth_in: Balance,
+        token_out: Balance,
+    }
 
     #[ink(event)]
     pub struct ETHSwapped {
@@ -40,14 +40,14 @@ mod market_maker {
 
     impl MarketMaker {
         #[ink(constructor)]
-        pub fn new() -> Self {
-            Self {
-                owner: Self::env().caller(),
-                eth_reserve: 0,
-                token_reserve: 0,
-                token_balances: HashMap::new(),
-            }
-        }
+        // pub fn new() -> Self {
+        //     Self {
+        //         owner: Self::env().caller(),
+        //         eth_reserve: 0,
+        //         token_reserve: 0,
+        //         token_balances: HashMap::new(),
+        //     }
+        // }
 
         #[ink(message)]
         pub fn add_liquidity(&mut self, token_amount: Balance) -> bool {
