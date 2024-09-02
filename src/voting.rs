@@ -40,14 +40,14 @@ mod voting {
             Ok(())
         }
 
-        // #[ink(message)]
-        // pub fn get_votes(&self, candidate: String) -> u32 {
-        //     self.votes.get(&candidate).unwrap_or(0)
-        // }
+        #[ink(message)]
+        pub fn get_votes(&self, candidate: String) -> u32 {
+            self.votes.get(&candidate).unwrap_or(0)
+        }
 
         #[ink(message)]
-        pub fn get_candidates(&self) -> Vec<String> {
-            self.candidates.clone()
-        }
+        // pub fn get_candidates(&self) -> Vec<String> {
+        //     self.candidates.clone()
+        // }
     }
 }
