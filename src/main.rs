@@ -98,26 +98,26 @@ impl TokenContract {
         *self.balances.get(account).unwrap_or(&0)
     }
 
-    // fn allowance(&self, owner: &str, spender: &str) -> u64 {
-    //     self.allowances
-    //         .get(owner)
-    //         .and_then(|spenders| spenders.get(spender))
-    //         .cloned()
-    //         .unwrap_or(0)
-    // }
+    fn allowance(&self, owner: &str, spender: &str) -> u64 {
+        self.allowances
+            .get(owner)
+            .and_then(|spenders| spenders.get(spender))
+            .cloned()
+            .unwrap_or(0)
+    }
 
     fn get_token_info(&self) -> (String, String, u64) {
         (self.name.clone(), self.symbol.clone(), self.total_supply)
     }
 
-    fn check_balance(&self, account: &str, amount: u64) -> Result<(), String> {
-        let balance = self.balance_of(account);
-        if balance < amount {
-            Err(format!("Insufficient balance for {}", account))
-        } else {
-            Ok(())
-        }
-    }
+    // fn check_balance(&self, account: &str, amount: u64) -> Result<(), String> {
+    //     let balance = self.balance_of(account);
+    //     if balance < amount {
+    //         Err(format!("Insufficient balance for {}", account))
+    //     } else {
+    //         Ok(())
+    //     }
+    // }
 
     fn check_allowance(&self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
         let allowed = self.allowance(owner, spender);
