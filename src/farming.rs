@@ -26,30 +26,30 @@ mod farming {
 
     impl Farming {
         #[ink(constructor)]
-        // pub fn new(reward_rate: Balance) -> Self {
-        //     Self {
-        //         total_staked: 0,
-        //         reward_rate,
-        //         stakers: StorageHashMap::new(),
-        //     }
-        // }
+        pub fn new(reward_rate: Balance) -> Self {
+            Self {
+                total_staked: 0,
+                reward_rate,
+                stakers: StorageHashMap::new(),
+            }
+        }
 
         #[ink(message)]
-        pub fn stake(&mut self, amount: Balance) {
-            let caller = self.env().caller();
-            let block_number = self.env().block_number();
+        // pub fn stake(&mut self, amount: Balance) {
+        //     let caller = self.env().caller();
+        //     let block_number = self.env().block_number();
 
-            let mut stake_info = self.stakers.get(&caller).cloned().unwrap_or_default();
+        //     let mut stake_info = self.stakers.get(&caller).cloned().unwrap_or_default();
 
-            let pending = self.pending_reward(&caller);
+        //     let pending = self.pending_reward(&caller);
 
-            stake_info.amount += amount;
-            stake_info.reward_debt += pending;
-            stake_info.last_staked = block_number;
+        //     stake_info.amount += amount;
+        //     stake_info.reward_debt += pending;
+        //     stake_info.last_staked = block_number;
 
-            self.total_staked += amount;
-            self.stakers.insert(caller, stake_info);
-        }
+        //     self.total_staked += amount;
+        //     self.stakers.insert(caller, stake_info);
+        // }
 
         #[ink(message)]
         pub fn withdraw(&mut self, amount: Balance) {
