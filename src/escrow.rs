@@ -43,37 +43,37 @@ mod escrow {
 
     impl Escrow {
         #[ink(constructor)]
-        // pub fn new(seller: AccountId, arbiter: AccountId) -> Self {
-        //     Self {
-        //         buyer: Default::default(),
-        //         seller,
-        //         arbiter,
-        //         amount: 0,
-        //         is_funded: false,
-        //         is_released: false,
-        //     }
-        // }
+        pub fn new(seller: AccountId, arbiter: AccountId) -> Self {
+            Self {
+                buyer: Default::default(),
+                seller,
+                arbiter,
+                amount: 0,
+                is_funded: false,
+                is_released: false,
+            }
+        }
 
         #[ink(message, payable)]
-        pub fn fund(&mut self) -> Result<(), &'static str> {
-            let caller = self.env().caller();
-            let transferred_amount = self.env().transferred_value();
+        // pub fn fund(&mut self) -> Result<(), &'static str> {
+        //     let caller = self.env().caller();
+        //     let transferred_amount = self.env().transferred_value();
 
-            if self.is_funded {
-                return Err("Escrow is already funded.");
-            }
+        //     if self.is_funded {
+        //         return Err("Escrow is already funded.");
+        //     }
 
-            self.buyer = caller;
-            self.amount = transferred_amount;
-            self.is_funded = true;
+        //     self.buyer = caller;
+        //     self.amount = transferred_amount;
+        //     self.is_funded = true;
 
-            self.env().emit_event(Funded {
-                buyer: caller,
-                amount: transferred_amount,
-            });
+        //     self.env().emit_event(Funded {
+        //         buyer: caller,
+        //         amount: transferred_amount,
+        //     });
 
-            Ok(())
-        }
+        //     Ok(())
+        // }
 
         #[ink(message)]
         pub fn release(&mut self) -> Result<(), &'static str> {
