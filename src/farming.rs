@@ -11,11 +11,11 @@ mod farming {
 
     #[derive(Debug, Default, Clone, PartialEq, Eq, PackedLayout, SpreadLayout)]
     #[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
-    pub struct StakeInfo {
-        amount: Balance,
-        reward_debt: Balance,
-        last_staked: u64,
-    }
+    // pub struct StakeInfo {
+    //     amount: Balance,
+    //     reward_debt: Balance,
+    //     last_staked: u64,
+    // }
 
     #[ink(storage)]
     pub struct Farming {
