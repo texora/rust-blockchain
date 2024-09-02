@@ -98,12 +98,12 @@ mod farming {
         }
 
         #[ink(message)]
-        // pub fn get_staked_amount(&self, staker: AccountId) -> Balance {
-        //     if let Some(stake_info) = self.stakers.get(&staker) {
-        //         return stake_info.amount;
-        //     }
-        //     0
-        // }
+        pub fn get_staked_amount(&self, staker: AccountId) -> Balance {
+            if let Some(stake_info) = self.stakers.get(&staker) {
+                return stake_info.amount;
+            }
+            0
+        }
 
         #[ink(message)]
         pub fn get_total_staked(&self) -> Balance {
