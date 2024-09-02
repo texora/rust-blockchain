@@ -76,32 +76,32 @@ mod escrow {
         }
 
         #[ink(message)]
-        // pub fn release(&mut self) -> Result<(), &'static str> {
-        //     let caller = self.env().caller();
+        pub fn release(&mut self) -> Result<(), &'static str> {
+            let caller = self.env().caller();
 
-        //     if caller != self.arbiter {
-        //         return Err("Only the arbiter can release the funds.");
-        //     }
+            if caller != self.arbiter {
+                return Err("Only the arbiter can release the funds.");
+            }
 
-        //     if !self.is_funded {
-        //         return Err("Escrow is not funded.");
-        //     }
+            if !self.is_funded {
+                return Err("Escrow is not funded.");
+            }
 
-        //     if self.is_released {
-        //         return Err("Funds have already been released.");
-        //     }
+            if self.is_released {
+                return Err("Funds have already been released.");
+            }
 
-        //     self.is_released = true;
+            self.is_released = true;
 
-        //     self.env().transfer(self.seller, self.amount)?;
+            self.env().transfer(self.seller, self.amount)?;
 
-        //     self.env().emit_event(Released {
-        //         to: self.seller,
-        //         amount: self.amount,
-        //     });
+            self.env().emit_event(Released {
+                to: self.seller,
+                amount: self.amount,
+            });
 
-        //     Ok(())
-        // }
+            Ok(())
+        }
 
         #[ink(message)]
         pub fn refund(&mut self) -> Result<(), &'static str> {
