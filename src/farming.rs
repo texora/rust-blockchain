@@ -71,31 +71,31 @@ mod farming {
         }
 
         #[ink(message)]
-        // pub fn claim(&mut self) {
-        //     let caller = self.env().caller();
-        //     let pending = self.pending_reward(&caller);
+        pub fn claim(&mut self) {
+            let caller = self.env().caller();
+            let pending = self.pending_reward(&caller);
 
-        //     let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
+            let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
 
-        //     self.env()
-        //         .transfer(caller, pending)
-        //         .expect("Transfer failed");
+            self.env()
+                .transfer(caller, pending)
+                .expect("Transfer failed");
 
-        //     stake_info.reward_debt = 0;
-        //     self.stakers.insert(caller, stake_info);
-        // }
+            stake_info.reward_debt = 0;
+            self.stakers.insert(caller, stake_info);
+        }
 
         #[ink(message)]
-        pub fn pending_reward(&self, staker: &AccountId) -> Balance {
-            if let Some(stake_info) = self.stakers.get(staker) {
-                let block_number = self.env().block_number();
-                let staked_time = block_number - stake_info.last_staked;
-                let pending = stake_info.amount * self.reward_rate * staked_time as Balance;
+        // pub fn pending_reward(&self, staker: &AccountId) -> Balance {
+        //     if let Some(stake_info) = self.stakers.get(staker) {
+        //         let block_number = self.env().block_number();
+        //         let staked_time = block_number - stake_info.last_staked;
+        //         let pending = stake_info.amount * self.reward_rate * staked_time as Balance;
 
-                return pending - stake_info.reward_debt;
-            }
-            0
-        }
+        //         return pending - stake_info.reward_debt;
+        //     }
+        //     0
+        // }
 
         #[ink(message)]
         pub fn get_staked_amount(&self, staker: AccountId) -> Balance {
