@@ -40,35 +40,35 @@ mod market_maker {
 
     impl MarketMaker {
         #[ink(constructor)]
-        // pub fn new() -> Self {
-        //     Self {
-        //         owner: Self::env().caller(),
-        //         eth_reserve: 0,
-        //         token_reserve: 0,
-        //         token_balances: HashMap::new(),
-        //     }
-        // }
+        pub fn new() -> Self {
+            Self {
+                owner: Self::env().caller(),
+                eth_reserve: 0,
+                token_reserve: 0,
+                token_balances: HashMap::new(),
+            }
+        }
 
         #[ink(message)]
-        pub fn add_liquidity(&mut self, token_amount: Balance) -> bool {
-            let caller = self.env().caller();
-            let eth_amount = self.env().transferred_balance();
+        // pub fn add_liquidity(&mut self, token_amount: Balance) -> bool {
+        //     let caller = self.env().caller();
+        //     let eth_amount = self.env().transferred_balance();
 
-            assert!(token_amount > 0 && eth_amount > 0, "Invalid amounts");
+        //     assert!(token_amount > 0 && eth_amount > 0, "Invalid amounts");
 
-            self.eth_reserve += eth_amount;
-            self.token_reserve += token_amount;
+        //     self.eth_reserve += eth_amount;
+        //     self.token_reserve += token_amount;
 
-            self.token_balances.insert(caller, token_amount);
+        //     self.token_balances.insert(caller, token_amount);
 
-            self.env().emit_event(LiquidityAdded {
-                provider: caller,
-                eth_amount,
-                token_amount,
-            });
+        //     self.env().emit_event(LiquidityAdded {
+        //         provider: caller,
+        //         eth_amount,
+        //         token_amount,
+        //     });
 
-            true
-        }
+        //     true
+        // }
 
         #[ink(message)]
         pub fn swap_eth_for_tokens(&mut self) -> Balance {
