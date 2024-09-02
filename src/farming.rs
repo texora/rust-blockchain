@@ -52,38 +52,38 @@ mod farming {
         }
 
         #[ink(message)]
-        // pub fn withdraw(&mut self, amount: Balance) {
-        //     let caller = self.env().caller();
-        //     let block_number = self.env().block_number();
-
-        //     let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
-
-        //     assert!(stake_info.amount >= amount, "Insufficient staked balance");
-
-        //     let pending = self.pending_reward(&caller);
-
-        //     stake_info.amount -= amount;
-        //     stake_info.reward_debt += pending;
-        //     stake_info.last_staked = block_number;
-
-        //     self.total_staked -= amount;
-        //     self.stakers.insert(caller, stake_info);
-        // }
-
-        #[ink(message)]
-        pub fn claim(&mut self) {
+        pub fn withdraw(&mut self, amount: Balance) {
             let caller = self.env().caller();
-            let pending = self.pending_reward(&caller);
+            let block_number = self.env().block_number();
 
             let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
 
-            self.env()
-                .transfer(caller, pending)
-                .expect("Transfer failed");
+            assert!(stake_info.amount >= amount, "Insufficient staked balance");
 
-            stake_info.reward_debt = 0;
+            let pending = self.pending_reward(&caller);
+
+            stake_info.amount -= amount;
+            stake_info.reward_debt += pending;
+            stake_info.last_staked = block_number;
+
+            self.total_staked -= amount;
             self.stakers.insert(caller, stake_info);
         }
+
+        #[ink(message)]
+        // pub fn claim(&mut self) {
+        //     let caller = self.env().caller();
+        //     let pending = self.pending_reward(&caller);
+
+        //     let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
+
+        //     self.env()
+        //         .transfer(caller, pending)
+        //         .expect("Transfer failed");
+
+        //     stake_info.reward_debt = 0;
+        //     self.stakers.insert(caller, stake_info);
+        // }
 
         #[ink(message)]
         pub fn pending_reward(&self, staker: &AccountId) -> Balance {
