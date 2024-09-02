@@ -50,50 +50,50 @@ mod market_maker {
         }
 
         #[ink(message)]
-        // pub fn add_liquidity(&mut self, token_amount: Balance) -> bool {
-        //     let caller = self.env().caller();
-        //     let eth_amount = self.env().transferred_balance();
-
-        //     assert!(token_amount > 0 && eth_amount > 0, "Invalid amounts");
-
-        //     self.eth_reserve += eth_amount;
-        //     self.token_reserve += token_amount;
-
-        //     self.token_balances.insert(caller, token_amount);
-
-        //     self.env().emit_event(LiquidityAdded {
-        //         provider: caller,
-        //         eth_amount,
-        //         token_amount,
-        //     });
-
-        //     true
-        // }
-
-        #[ink(message)]
-        pub fn swap_eth_for_tokens(&mut self) -> Balance {
+        pub fn add_liquidity(&mut self, token_amount: Balance) -> bool {
             let caller = self.env().caller();
-            let eth_in = self.env().transferred_balance();
-            assert!(eth_in > 0, "Invalid ETH amount");
+            let eth_amount = self.env().transferred_balance();
 
-            let token_out = self.get_token_price(eth_in);
-            assert!(token_out <= self.token_reserve, "Not enough liquidity");
+            assert!(token_amount > 0 && eth_amount > 0, "Invalid amounts");
 
-            self.eth_reserve += eth_in;
-            self.token_reserve -= token_out;
+            self.eth_reserve += eth_amount;
+            self.token_reserve += token_amount;
 
-            let caller_balance = self.token_balances.get(&caller).unwrap_or(&0);
-            self.token_balances
-                .insert(caller, caller_balance + token_out);
+            self.token_balances.insert(caller, token_amount);
 
-            self.env().emit_event(TokensSwapped {
-                swapper: caller,
-                eth_in,
-                token_out,
+            self.env().emit_event(LiquidityAdded {
+                provider: caller,
+                eth_amount,
+                token_amount,
             });
 
-            token_out
+            true
         }
+
+        #[ink(message)]
+        // pub fn swap_eth_for_tokens(&mut self) -> Balance {
+        //     let caller = self.env().caller();
+        //     let eth_in = self.env().transferred_balance();
+        //     assert!(eth_in > 0, "Invalid ETH amount");
+
+        //     let token_out = self.get_token_price(eth_in);
+        //     assert!(token_out <= self.token_reserve, "Not enough liquidity");
+
+        //     self.eth_reserve += eth_in;
+        //     self.token_reserve -= token_out;
+
+        //     let caller_balance = self.token_balances.get(&caller).unwrap_or(&0);
+        //     self.token_balances
+        //         .insert(caller, caller_balance + token_out);
+
+        //     self.env().emit_event(TokensSwapped {
+        //         swapper: caller,
+        //         eth_in,
+        //         token_out,
+        //     });
+
+        //     token_out
+        // }
 
         #[ink(message)]
         pub fn swap_tokens_for_eth(&mut self, token_in: Balance) -> Balance {
