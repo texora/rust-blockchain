@@ -45,12 +45,12 @@ impl TokenContract {
         }
     }
 
-    // fn transfer(&mut self, from: &str, to: &str, amount: u64) -> Result<(), String> {
-    //     self.check_balance(from, amount)?;
-    //     self.update_balances(from, to, amount)?;
-    //     self.emit_event("Transfer", from, to, amount);
-    //     Ok(())
-    // }
+    fn transfer(&mut self, from: &str, to: &str, amount: u64) -> Result<(), String> {
+        self.check_balance(from, amount)?;
+        self.update_balances(from, to, amount)?;
+        self.emit_event("Transfer", from, to, amount);
+        Ok(())
+    }
 
     fn transfer_from(
         &mut self,
@@ -67,14 +67,14 @@ impl TokenContract {
         Ok(())
     }
 
-    fn approve(&mut self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
-        self.allowances
-            .entry(owner.to_string())
-            .or_insert_with(HashMap::new)
-            .insert(spender.to_string(), amount);
-        self.emit_event("Approval", owner, spender, amount);
-        Ok(())
-    }
+    // fn approve(&mut self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
+    //     self.allowances
+    //         .entry(owner.to_string())
+    //         .or_insert_with(HashMap::new)
+    //         .insert(spender.to_string(), amount);
+    //     self.emit_event("Approval", owner, spender, amount);
+    //     Ok(())
+    // }
 
     fn mint(&mut self, to: &str, amount: u64) -> Result<(), String> {
         if to != self.owner {
