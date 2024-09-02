@@ -86,17 +86,17 @@ impl TokenContract {
         Ok(())
     }
 
-    // fn burn(&mut self, from: &str, amount: u64) -> Result<(), String> {
-    //     self.check_balance(from, amount)?;
-    //     *self.balances.get_mut(from).unwrap() -= amount;
-    //     self.total_supply -= amount;
-    //     self.emit_event("Burn", from, "0x0", amount);
-    //     Ok(())
-    // }
-
-    fn balance_of(&self, account: &str) -> u64 {
-        *self.balances.get(account).unwrap_or(&0)
+    fn burn(&mut self, from: &str, amount: u64) -> Result<(), String> {
+        self.check_balance(from, amount)?;
+        *self.balances.get_mut(from).unwrap() -= amount;
+        self.total_supply -= amount;
+        self.emit_event("Burn", from, "0x0", amount);
+        Ok(())
     }
+
+    // fn balance_of(&self, account: &str) -> u64 {
+    //     *self.balances.get(account).unwrap_or(&0)
+    // }
 
     fn allowance(&self, owner: &str, spender: &str) -> u64 {
         self.allowances
