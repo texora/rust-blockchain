@@ -110,26 +110,26 @@ impl TokenContract {
         (self.name.clone(), self.symbol.clone(), self.total_supply)
     }
 
-    // fn check_balance(&self, account: &str, amount: u64) -> Result<(), String> {
-    //     let balance = self.balance_of(account);
-    //     if balance < amount {
-    //         Err(format!("Insufficient balance for {}", account))
-    //     } else {
-    //         Ok(())
-    //     }
-    // }
-
-    fn check_allowance(&self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
-        let allowed = self.allowance(owner, spender);
-        if allowed < amount {
-            Err(format!(
-                "Insufficient allowance for {} from {}",
-                spender, owner
-            ))
+    fn check_balance(&self, account: &str, amount: u64) -> Result<(), String> {
+        let balance = self.balance_of(account);
+        if balance < amount {
+            Err(format!("Insufficient balance for {}", account))
         } else {
             Ok(())
         }
     }
+
+    // fn check_allowance(&self, owner: &str, spender: &str, amount: u64) -> Result<(), String> {
+    //     let allowed = self.allowance(owner, spender);
+    //     if allowed < amount {
+    //         Err(format!(
+    //             "Insufficient allowance for {} from {}",
+    //             spender, owner
+    //         ))
+    //     } else {
+    //         Ok(())
+    //     }
+    // }
 
     fn update_balances(&mut self, from: &str, to: &str, amount: u64) -> Result<(), String> {
         *self.balances.entry(from.to_string()).or_insert(0) -= amount;
