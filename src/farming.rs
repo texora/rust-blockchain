@@ -35,40 +35,40 @@ mod farming {
         }
 
         #[ink(message)]
-        // pub fn stake(&mut self, amount: Balance) {
-        //     let caller = self.env().caller();
-        //     let block_number = self.env().block_number();
-
-        //     let mut stake_info = self.stakers.get(&caller).cloned().unwrap_or_default();
-
-        //     let pending = self.pending_reward(&caller);
-
-        //     stake_info.amount += amount;
-        //     stake_info.reward_debt += pending;
-        //     stake_info.last_staked = block_number;
-
-        //     self.total_staked += amount;
-        //     self.stakers.insert(caller, stake_info);
-        // }
-
-        #[ink(message)]
-        pub fn withdraw(&mut self, amount: Balance) {
+        pub fn stake(&mut self, amount: Balance) {
             let caller = self.env().caller();
             let block_number = self.env().block_number();
 
-            let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
-
-            assert!(stake_info.amount >= amount, "Insufficient staked balance");
+            let mut stake_info = self.stakers.get(&caller).cloned().unwrap_or_default();
 
             let pending = self.pending_reward(&caller);
 
-            stake_info.amount -= amount;
+            stake_info.amount += amount;
             stake_info.reward_debt += pending;
             stake_info.last_staked = block_number;
 
-            self.total_staked -= amount;
+            self.total_staked += amount;
             self.stakers.insert(caller, stake_info);
         }
+
+        #[ink(message)]
+        // pub fn withdraw(&mut self, amount: Balance) {
+        //     let caller = self.env().caller();
+        //     let block_number = self.env().block_number();
+
+        //     let mut stake_info = self.stakers.get(&caller).cloned().expect("No stake found");
+
+        //     assert!(stake_info.amount >= amount, "Insufficient staked balance");
+
+        //     let pending = self.pending_reward(&caller);
+
+        //     stake_info.amount -= amount;
+        //     stake_info.reward_debt += pending;
+        //     stake_info.last_staked = block_number;
+
+        //     self.total_staked -= amount;
+        //     self.stakers.insert(caller, stake_info);
+        // }
 
         #[ink(message)]
         pub fn claim(&mut self) {
