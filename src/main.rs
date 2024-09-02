@@ -76,23 +76,23 @@ impl TokenContract {
         Ok(())
     }
 
-    // fn mint(&mut self, to: &str, amount: u64) -> Result<(), String> {
-    //     if to != self.owner {
-    //         return Err("Only owner can mint tokens".to_string());
-    //     }
-    //     *self.balances.entry(to.to_string()).or_insert(0) += amount;
-    //     self.total_supply += amount;
-    //     self.emit_event("Mint", "0x0", to, amount);
-    //     Ok(())
-    // }
-
-    fn burn(&mut self, from: &str, amount: u64) -> Result<(), String> {
-        self.check_balance(from, amount)?;
-        *self.balances.get_mut(from).unwrap() -= amount;
-        self.total_supply -= amount;
-        self.emit_event("Burn", from, "0x0", amount);
+    fn mint(&mut self, to: &str, amount: u64) -> Result<(), String> {
+        if to != self.owner {
+            return Err("Only owner can mint tokens".to_string());
+        }
+        *self.balances.entry(to.to_string()).or_insert(0) += amount;
+        self.total_supply += amount;
+        self.emit_event("Mint", "0x0", to, amount);
         Ok(())
     }
+
+    // fn burn(&mut self, from: &str, amount: u64) -> Result<(), String> {
+    //     self.check_balance(from, amount)?;
+    //     *self.balances.get_mut(from).unwrap() -= amount;
+    //     self.total_supply -= amount;
+    //     self.emit_event("Burn", from, "0x0", amount);
+    //     Ok(())
+    // }
 
     fn balance_of(&self, account: &str) -> u64 {
         *self.balances.get(account).unwrap_or(&0)
