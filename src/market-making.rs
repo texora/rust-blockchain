@@ -15,20 +15,20 @@ mod market_maker {
     }
 
     #[ink(event)]
-    // pub struct LiquidityAdded {
-    //     #[ink(topic)]
-    //     provider: AccountId,
-    //     eth_amount: Balance,
-    //     token_amount: Balance,
-    // }
+    pub struct LiquidityAdded {
+        #[ink(topic)]
+        provider: AccountId,
+        eth_amount: Balance,
+        token_amount: Balance,
+    }
 
     #[ink(event)]
-    pub struct TokensSwapped {
-        #[ink(topic)]
-        swapper: AccountId,
-        eth_in: Balance,
-        token_out: Balance,
-    }
+    // pub struct TokensSwapped {
+    //     #[ink(topic)]
+    //     swapper: AccountId,
+    //     eth_in: Balance,
+    //     token_out: Balance,
+    // }
 
     #[ink(event)]
     pub struct ETHSwapped {
