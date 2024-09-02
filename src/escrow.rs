@@ -18,12 +18,12 @@ mod escrow {
     }
 
     #[ink(event)]
-    // pub struct Funded {
-    //     #[ink(topic)]
-    //     buyer: AccountId,
-    //     #[ink(topic)]
-    //     amount: Balance,
-    // }
+    pub struct Funded {
+        #[ink(topic)]
+        buyer: AccountId,
+        #[ink(topic)]
+        amount: Balance,
+    }
 
     #[ink(event)]
     pub struct Released {
@@ -34,12 +34,12 @@ mod escrow {
     }
 
     #[ink(event)]
-    pub struct Refunded {
-        #[ink(topic)]
-        to: AccountId,
-        #[ink(topic)]
-        amount: Balance,
-    }
+    // pub struct Refunded {
+    //     #[ink(topic)]
+    //     to: AccountId,
+    //     #[ink(topic)]
+    //     amount: Balance,
+    // }
 
     impl Escrow {
         #[ink(constructor)]
