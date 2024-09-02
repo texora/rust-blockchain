@@ -12,15 +12,15 @@ mod voting {
 
     impl Voting {
         #[ink(constructor)]
-        pub fn new(candidates: Vec<String>) -> Self {
-            let votes = Mapping::new();
-            let has_voted = Mapping::new();
-            Self {
-                candidates,
-                votes,
-                has_voted,
-            }
-        }
+        // pub fn new(candidates: Vec<String>) -> Self {
+        //     let votes = Mapping::new();
+        //     let has_voted = Mapping::new();
+        //     Self {
+        //         candidates,
+        //         votes,
+        //         has_voted,
+        //     }
+        // }
 
         #[ink(message)]
         pub fn vote(&mut self, candidate: String) -> Result<(), String> {
