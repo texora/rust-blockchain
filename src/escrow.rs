@@ -55,53 +55,53 @@ mod escrow {
         }
 
         #[ink(message, payable)]
-        // pub fn fund(&mut self) -> Result<(), &'static str> {
-        //     let caller = self.env().caller();
-        //     let transferred_amount = self.env().transferred_value();
-
-        //     if self.is_funded {
-        //         return Err("Escrow is already funded.");
-        //     }
-
-        //     self.buyer = caller;
-        //     self.amount = transferred_amount;
-        //     self.is_funded = true;
-
-        //     self.env().emit_event(Funded {
-        //         buyer: caller,
-        //         amount: transferred_amount,
-        //     });
-
-        //     Ok(())
-        // }
-
-        #[ink(message)]
-        pub fn release(&mut self) -> Result<(), &'static str> {
+        pub fn fund(&mut self) -> Result<(), &'static str> {
             let caller = self.env().caller();
+            let transferred_amount = self.env().transferred_value();
 
-            if caller != self.arbiter {
-                return Err("Only the arbiter can release the funds.");
+            if self.is_funded {
+                return Err("Escrow is already funded.");
             }
 
-            if !self.is_funded {
-                return Err("Escrow is not funded.");
-            }
+            self.buyer = caller;
+            self.amount = transferred_amount;
+            self.is_funded = true;
 
-            if self.is_released {
-                return Err("Funds have already been released.");
-            }
-
-            self.is_released = true;
-
-            self.env().transfer(self.seller, self.amount)?;
-
-            self.env().emit_event(Released {
-                to: self.seller,
-                amount: self.amount,
+            self.env().emit_event(Funded {
+                buyer: caller,
+                amount: transferred_amount,
             });
 
             Ok(())
         }
+
+        #[ink(message)]
+        // pub fn release(&mut self) -> Result<(), &'static str> {
+        //     let caller = self.env().caller();
+
+        //     if caller != self.arbiter {
+        //         return Err("Only the arbiter can release the funds.");
+        //     }
+
+        //     if !self.is_funded {
+        //         return Err("Escrow is not funded.");
+        //     }
+
+        //     if self.is_released {
+        //         return Err("Funds have already been released.");
+        //     }
+
+        //     self.is_released = true;
+
+        //     self.env().transfer(self.seller, self.amount)?;
+
+        //     self.env().emit_event(Released {
+        //         to: self.seller,
+        //         amount: self.amount,
+        //     });
+
+        //     Ok(())
+        // }
 
         #[ink(message)]
         pub fn refund(&mut self) -> Result<(), &'static str> {
