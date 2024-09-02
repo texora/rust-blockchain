@@ -19,15 +19,15 @@ impl fmt::Debug for Event {
     }
 }
 
-struct TokenContract {
-    name: String,
-    symbol: String,
-    total_supply: u64,
-    balances: HashMap<String, u64>,
-    allowances: HashMap<String, HashMap<String, u64>>,
-    events: Vec<Event>,
-    owner: String,
-}
+// struct TokenContract {
+//     name: String,
+//     symbol: String,
+//     total_supply: u64,
+//     balances: HashMap<String, u64>,
+//     allowances: HashMap<String, HashMap<String, u64>>,
+//     events: Vec<Event>,
+//     owner: String,
+// }
 
 impl TokenContract {
     fn new(name: String, symbol: String, initial_supply: u64) -> Self {
