@@ -81,22 +81,22 @@ mod simple_dex {
         }
 
         /// Helper function to calculate output amount based on input amount and reserves
-        // fn get_amount_out(&self, amount_in: Balance, reserve_in: Balance, reserve_out: Balance) -> Balance {
-        //     // Simple constant product formula: (x + Δx) * (y - Δy) = k
-        //     // Δy = (Δx * y) / (x + Δx)
-        //     (amount_in * reserve_out) / (reserve_in + amount_in)
-        // }
+        fn get_amount_out(&self, amount_in: Balance, reserve_in: Balance, reserve_out: Balance) -> Balance {
+            // Simple constant product formula: (x + Δx) * (y - Δy) = k
+            // Δy = (Δx * y) / (x + Δx)
+            (amount_in * reserve_out) / (reserve_in + amount_in)
+        }
 
         /// Helper function to calculate liquidity minted based on amounts added
-        fn calculate_liquidity(amount_a: Balance, amount_b: Balance) -> Balance {
-            // In a real DEX, this would be more sophisticated
-            // For simplicity, we'll take the minimum of the ratios
-            if amount_a == 0 || amount_b == 0 {
-                0
-            } else {
-                amount_a.min(amount_b)
-            }
-        }
+        // fn calculate_liquidity(amount_a: Balance, amount_b: Balance) -> Balance {
+        //     // In a real DEX, this would be more sophisticated
+        //     // For simplicity, we'll take the minimum of the ratios
+        //     if amount_a == 0 || amount_b == 0 {
+        //         0
+        //     } else {
+        //         amount_a.min(amount_b)
+        //     }
+        // }
 
         // Getter functions
         #[ink(message)]
