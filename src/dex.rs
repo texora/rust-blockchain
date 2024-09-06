@@ -88,15 +88,15 @@ mod simple_dex {
         }
 
         /// Helper function to calculate liquidity minted based on amounts added
-        // fn calculate_liquidity(amount_a: Balance, amount_b: Balance) -> Balance {
-        //     // In a real DEX, this would be more sophisticated
-        //     // For simplicity, we'll take the minimum of the ratios
-        //     if amount_a == 0 || amount_b == 0 {
-        //         0
-        //     } else {
-        //         amount_a.min(amount_b)
-        //     }
-        // }
+        fn calculate_liquidity(amount_a: Balance, amount_b: Balance) -> Balance {
+            // In a real DEX, this would be more sophisticated
+            // For simplicity, we'll take the minimum of the ratios
+            if amount_a == 0 || amount_b == 0 {
+                0
+            } else {
+                amount_a.min(amount_b)
+            }
+        }
 
         // Getter functions
         #[ink(message)]
